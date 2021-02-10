@@ -89,7 +89,7 @@
 
         @can('atlpay')
           <li>
-            <a href="{{ url('atlpay-management') }}" style="color: #fff;">
+            <a href="{{ route('atlpay.home') }}" style="color: #fff;">
               <i class="fa fa-calculator"></i> 
               <span>ATLPAY</span>
             </a>
@@ -111,7 +111,7 @@
             </li>
 
             <li class="treeview">
-              <a href="{{ url('coupon') }}" style="color: #fff;">
+              <a href="{{route('reduce.index')}}" style="color: #fff;">
                 <i class="fa fa-tag"></i> <span>Coupon Promo</span>
               </a>
             </li>

@@ -122,43 +122,43 @@ Route::get('/cash/flow/home', 'Backend\CashFlow\ManagementController@index')->na
 
 //***************CASH MENAGEMENT************* */
 //Route::get('/cache-management', 'CacheController@indcash/flow/transaction/confirmationex')->name('cache-management');
-Route::get('/cache-management/{id}/details', 'CacheController@details')->name('cache-management.details');
+//Route::get('/cache-management/{id}/details', 'CacheController@details')->name('cache-management.details');
 
-Route::get('/paiement-management/depotview', 'PayementController@depotview')->name('depotview');
-Route::get('/paiement-management/retraitview', 'PayementController@retraitview')->name('retraitview');
+//Route::get('/paiement-management/depotview', 'PayementController@depotview')->name('depotview');
+//Route::get('/paiement-management/retraitview', 'PayementController@retraitview')->name('retraitview');
 
 //Route::post('/paiement-management/depotretrait', 'PayementController@depotretrait')->name('depotretrait');
-Route::get('/paiement-management/story', 'PayementController@story');
-Route::get('/paiement-management/attente', 'PayementController@attente');
-Route::get('/paiement-management/clients', 'PayementController@client');
-Route::get('/paiement-management/search', 'PayementController@search')->name('paiement-management.search'); 
+//Route::get('/paiement-management/story', 'PayementController@story');
+//Route::get('/paiement-management/attente', 'PayementController@attente');
+//Route::get('/paiement-management/clients', 'PayementController@client');
+//Route::get('/paiement-management/search', 'PayementController@search')->name('paiement-management.search'); 
 
-Route::get('/paiement-management/{id}/editClient', 'PayementController@editClient')->name('paiement-management.editClient');
+//Route::get('/paiement-management/{id}/editClient', 'PayementController@editClient')->name('paiement-management.editClient');
 
-Route::get('/paiement-management/{id}/clientstory', 'PayementController@clientstory')->name('paiement-management.clientstory');
-Route::get('/paiement-management/{id}/clientdemande', 'PayementController@clientdemande')->name('paiement-management.clientdemande');
-Route::get('/paiement-management/{id}/detail', 'PayementController@detail')->name('paiement-management.detail');
-Route::get('/paiement-management/addclient', function(){ return view('paiement-mgmt/addclient');})->name('paiement-management.addclient');
-Route::post('/paiement-management/creatclient', 'PayementController@creatclient')->name('paiement-management.creatclient');
-Route::post('/paiement-management/gestion', 'PayementController@gestion')->name('paiement-management.gestion');
-Route::post('/paiement-management/decision', 'PayementController@decision')->name('paiement-management.decision');
-Route::post('/paiement-management/{id}/updateClient', 'PayementController@updateClient')->name('paiement-management.updateClient');
+//Route::get('/paiement-management/{id}/clientstory', 'PayementController@clientstory')->name('paiement-management.clientstory');
+//Route::get('/paiement-management/{id}/clientdemande', 'PayementController@clientdemande')->name('paiement-management.clientdemande');
+//Route::get('/paiement-management/{id}/detail', 'PayementController@detail')->name('paiement-management.detail');
+//Route::get('/paiement-management/addclient', function(){ return view('paiement-mgmt/addclient');})->name('paiement-management.addclient');
+//Route::post('/paiement-management/creatclient', 'PayementController@creatclient')->name('paiement-management.creatclient');
+//Route::post('/paiement-management/gestion', 'PayementController@gestion')->name('paiement-management.gestion');
+//Route::post('/paiement-management/decision', 'PayementController@decision')->name('paiement-management.decision');
+//Route::post('/paiement-management/{id}/updateClient', 'PayementController@updateClient')->name('paiement-management.updateClient');
 
-Route::get('/paiement-management/{id}/crediter', 'PayementController@crediter')->name('paiement-management.crediter');
-Route::get('/paiement-management/{id}/debiter', 'PayementController@debiter')->name('paiement-management.debiter');
+//Route::get('/paiement-management/{id}/crediter', 'PayementController@crediter')->name('paiement-management.crediter');
+//Route::get('/paiement-management/{id}/debiter', 'PayementController@debiter')->name('paiement-management.debiter');
 
-Route::post('/paiement-management/addmontant', 'PayementController@addmontant')->name('paiement-management.addmontant');
-Route::post('/paiement-management/retirermontant', 'PayementController@retirermontant')->name('paiement-management.retirermontant');
-Route::post('/paiement-management/searchcompte', 'PayementController@searchcompte')->name('searchcompte');
+//Route::post('/paiement-management/addmontant', 'PayementController@addmontant')->name('paiement-management.addmontant');
+//Route::post('/paiement-management/retirermontant', 'PayementController@retirermontant')->name('paiement-management.retirermontant');
+//Route::post('/paiement-management/searchcompte', 'PayementController@searchcompte')->name('searchcompte');
 //************* */ CASHOUT MANAGEMENT *********************//////
-Route::get('/cashout-management', 'CashoutController@index')->name('cashout-management');
+/*Route::get('/cashout-management', 'CashoutController@index')->name('cashout-management');
 Route::get('cashout-management/searchCashOut', 'CashoutController@searchCashOut')->name('cashout-management.searchCashOut'); 
 Route::get('cashout-management/{id}/editcashout', 'CashoutController@editcashout')->name('cashout-management.editcashout');
 Route::patch('cashout-management/{id}/update', 'CashoutController@update')->name('cashout-management.update'); 
 Route::patch('cashout-management/{id}/infos', 'CashoutController@infos')->name('cashout-management.infos'); 
 Route::get('cashout-management/{id}/gazaconfirmation', 'CashoutController@gazaconfirmation')->name('cashout-management.gazaconfirmation');
 Route::get('/cashout-gaza', 'CashoutController@gaza')->name('gaza-transfert');
-Route::get('/cashout-correction', 'CashoutController@correction');
+Route::get('/cashout-correction', 'CashoutController@correction');*/
 ///////////-***************** KYC ***********************/
 
 Route::get('/kyc-management/{id}/{email}', 'KycController@index')->name('kyc-management');
@@ -182,28 +182,28 @@ Route::post('/mail/send', 'MailController@send')->name('mail-send');
 
 //******************Abonnes MANEGEMENT  ******************** */
 //Route::get('/abonnes-management', 'AbonnesController@index')->name('abonnes-management');
-Route::get('/abonnes-details', 'AbonnesController@details')->name('abonnes-details');
-Route::get('/abonnes-kyc/{email}', 'AbonnesController@kyc')->name('abonnes');
-Route::get('abonnes-management/searchabonnes', 'AbonnesController@searchabonnes')->name('abonnes-management.searchabonnes');
+//Route::get('/abonnes-details', 'AbonnesController@details')->name('abonnes-details');
+//Route::get('/abonnes-kyc/{email}', 'AbonnesController@kyc')->name('abonnes');
+//Route::get('abonnes-management/searchabonnes', 'AbonnesController@searchabonnes')->name('abonnes-management.searchabonnes');
 //Route::get('abonnes-management/{id}/editabonnes', 'AbonnesController@editabonnes')->name('abonnes-management.editabonnes');
-Route::post('abonnes-management/updateAbonnes', 'AbonnesController@updateAbonnes')->name('abonnes-management.updateAbonnes');
-Route::post('abonnes-management/mailrejet', 'AbonnesController@mailrejet')->name('abonnes-management.mailrejet');
-Route::get('/abonnes-management/abonnes', 'AbonnesController@abonnes')->name('abonnes-management.abonnes');
-Route::get('/abonnes-parrainage', 'AbonnesController@parrainage');
+//Route::post('abonnes-management/updateAbonnes', 'AbonnesController@updateAbonnes')->name('abonnes-management.updateAbonnes');
+//Route::post('abonnes-management/mailrejet', 'AbonnesController@mailrejet')->name('abonnes-management.mailrejet');
+//Route::get('/abonnes-management/abonnes', 'AbonnesController@abonnes')->name('abonnes-management.abonnes');
+//Route::get('/abonnes-parrainage', 'AbonnesController@parrainage');
 
 
-Route::get('/abonnes-management/{id}/telechargerdocument', 'AbonnesController@telechargerdocument')->name('telechargerdocument');
-Route::get('/abonnes-management/{id}/visualiser', 'AbonnesController@visualiser')->name('visualiser');
-Route::get('/abonnes-management/{id}/supprimerdocument', 'AbonnesController@supprimerdocument')->name('supprimerdocument');
+//Route::get('/abonnes-management/{id}/telechargerdocument', 'AbonnesController@telechargerdocument')->name('telechargerdocument');
+//Route::get('/abonnes-management/{id}/visualiser', 'AbonnesController@visualiser')->name('visualiser');
+//Route::get('/abonnes-management/{id}/supprimerdocument', 'AbonnesController@supprimerdocument')->name('supprimerdocument');
 
 //******************Stats MANEGEMENT  ******************** */
-Route::get('/stats-management', 'StatsController@index')->name('stats');
+//Route::get('/stats-management', 'StatsController@index')->name('stats');
 
 
-Route::get('/cache-management/retrait', 'CacheController@retrait')->name('cache-management.retrait'); 
-Route::get('/cache-management/cashin', 'CacheController@cashin')->name('cache-management.cashin');
+//Route::get('/cache-management/retrait', 'CacheController@retrait')->name('cache-management.retrait'); 
+//Route::get('/cache-management/cashin', 'CacheController@cashin')->name('cache-management.cashin');
 
-Route::get('/cache-management/cashout', 'CacheController@cashout')->name('cache-management.cashout');
+//Route::get('/cache-management/cashout', 'CacheController@cashout')->name('cache-management.cashout');
 
 //Route::resource('cache-management/retrait', 'CacheController');
 //Route::resource('cache-management', 'CacheController');
@@ -232,7 +232,7 @@ Route::get('/agencies/search', 'Backend\Agency\ManagementController@index')->nam
 //Route::post('/agence-management/depotretraitagence', 'AgenceController@depotretraitagence')->name('depotretraitagence');
 //Route::get('/agence-management/potadegenceview', 'AgenceController@depotagenceview')->name('depotagenceview');
 //Route::get('/agence-management/retraitagenceview', 'AgenceController@retraitagenceview')->name('retraitagenceview');
-Route::get('agence-management/destroy', 'AgenceController@destroy')->name('agence-management.destroy');
+//Route::get('agence-management/destroy', 'AgenceController@destroy')->name('agence-management.destroy');
 //Route::get('/agence-management/{id}/crediter', 'AgenceController@crediter')->name('agence-management.crediter');
 //Route::get('/agence-management/{id}/debiter', 'AgenceController@debiter')->name('agence-management.debiter');
 //Route::get('/agence-management/{id}/editagence', 'AgenceController@editagence')->name('agence-management.editagence');
@@ -278,27 +278,30 @@ Route::any('/agency/edit/{id}', 'Backend\Agency\ManagementController@update')->n
 Route::get('/agency/edit/{id}', 'Backend\Agency\ManagementController@edit')->name('agency.edit');
 
 //Route::get('/agence-management/addagence', 'AgenceController@addagence')->name('agence-management.addagence');
-Route::resource('agence-management', 'AgenceController');
-Route::post('/agence-management/addmontant', 'AgenceController@addmontant')->name('agence-management.addmontant');
-Route::post('/agence-management/retirermontant', 'AgenceController@retirermontant')->name('agence-management.retirermontant');
+//Route::resource('agence-management', 'AgenceController');
+//Route::post('/agence-management/addmontant', 'AgenceController@addmontant')->name('agence-management.addmontant');
+//Route::post('/agence-management/retirermontant', 'AgenceController@retirermontant')->name('agence-management.retirermontant');
 
 
-Route::post('atlpay-management/search', 'AtlpayController@search')->name('atlpay-management.search');
+//Route::post('atlpay-management/search', 'AtlpayController@search')->name('atlpay-management.search');
 
-Route::get('atlpay-management', 'AtlpayController@index');
-Route::post('atlpay-management/excel', 'AtlpayController@exportExcel')->name('excel');
-Route::get('atlpay-management/statatlpay', 'AtlpayController@statatlpay')->name('statatlpay');
-Route::get('atlpay-management/{id}/details', 'AtlpayController@details')->name('atlpay-management.details');
-Route::post('atlpay-management/pdf', 'AtlpayController@exportPDF')->name('pdf');
+//Route::get('atlpay-management', 'AtlpayController@index');
+//Route::post('atlpay-management/excel', 'AtlpayController@exportExcel')->name('excel');
+//Route::get('atlpay-management/statatlpay', 'AtlpayController@statatlpay')->name('statatlpay');
+//Route::get('atlpay-management/{id}/details', 'AtlpayController@details')->name('atlpay-management.details');
+//Route::post('atlpay-management/pdf', 'AtlpayController@exportPDF')->name('pdf');
 
 
-
+//ATL
+Route::get('atlpay/home', 'Backend\Atlpay\ManagementController@index')->name('atlpay.home');
+Route::post('atlpay/export/excel', 'Backend\Atlpay\ManagementController@exportExcel')->name('atlpay.export.excel');
+Route::get('atlpay/detail/{date}', 'Backend\Atlpay\ManagementController@details')->name('atlpay.detail');
 
 //Route::get('/dashboard', 'CacheController@index');
 // Route::get('/system-management/{option}', 'SystemMgmtController@index');
 Route::get('/profile', 'ProfileController@index');
 
-Route::post('user-management/search', 'UserManagementController@search')->name('user-management.search');
+//Route::post('user-management/search', 'UserManagementController@search')->name('user-management.search');
 Route::resource('user-management', 'UserManagementController');
 Route::resource('transfert-management', 'TransfertController');
 

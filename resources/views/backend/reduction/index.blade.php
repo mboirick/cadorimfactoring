@@ -2,7 +2,6 @@
 @section('action-content')
 <!-- Main content -->
 
-
 <section class="content">
     <div class="box">
    

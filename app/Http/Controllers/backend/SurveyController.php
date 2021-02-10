@@ -15,7 +15,11 @@ use App\Envoie_sondage;
 
 class SurveyController extends BaseController
 {
-    
+    protected function setPermission()
+    {
+        $this->middleware('permission:sondage', ['only' => ['index','answers', 'store']]);
+    }
+
     public function index()
     {
         $sondages   = $this->pollsRepository->getAll();

@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Session;
 
 class ReductionController extends BaseController
 {
+    protected function setPermission()
+    {
+        $this->middleware('permission:coupon', ['only' => ['index', 'create','store', 'edit', 'update', 'destroy', 'applycoupon']]);
+    }
+
     public function index()
     {
         $menu_active = 4;

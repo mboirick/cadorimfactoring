@@ -13,7 +13,7 @@ class RoleController extends BaseController
 {
     protected function setPermission()
     {
-        //$this->middleware('permission:admin-role', ['only' => ['index','destroy', 'edit','update', 'create', 'store']]);
+        $this->middleware('permission:admin-role', ['only' => ['index','destroy', 'edit','update', 'create', 'store']]);
     }
 
     /**

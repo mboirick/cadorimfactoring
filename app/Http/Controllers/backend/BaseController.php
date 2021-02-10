@@ -12,6 +12,7 @@ use App\Repositories\Backend\CashRepository;
 use App\Repositories\Backend\CityRepository;
 use App\Repositories\Backend\CustomerBalanceRepository;
 use App\Repositories\Backend\CustomerRepository;
+use App\Repositories\Backend\AtlpayRepository ;
 use App\Repositories\Backend\OrderRepository;
 use App\Repositories\Backend\PaymentsRepository;
 use App\Repositories\Backend\SubscribersRepository;
@@ -145,6 +146,11 @@ class BaseController extends Controller
     protected $couponRepository;
 
     /**
+    * @var AtlpayRepository
+    */
+    protected $atlpayRepository;
+
+    /**
      * BaseController constructor.
      * @param UserRepository $userRepositor
      * @param CashRepository $cashRepositor
@@ -163,6 +169,7 @@ class BaseController extends Controller
      * @param pollsRepository $pollsRepository
      * @param PollResponseRepository $pollResponseRepository
      * @param CouponRepository $couponRepository
+     * @param AtlpayRepository $atlpayRepository
      */
     public function __construct(UserRepository $userRepository, CashRepository $cashRepository,
                                 CustomerBalanceRepository $customerBalanceRepository, 
@@ -175,7 +182,8 @@ class BaseController extends Controller
                                 DocumentsRepository $documentsRepository, CoordinatedOrdersRepository $coordinatedOrdersRepository,
                                 RoleRepository $roleRepository, PermissionRepository $permissionRepository,
                                 SendPollsRepository $sendPollsRepository, PollsRepository $pollsRepository,
-                                PollResponseRepository $pollResponseRepository, CouponRepository $couponRepository)
+                                PollResponseRepository $pollResponseRepository, CouponRepository $couponRepository,
+                                AtlpayRepository $atlpayRepository)
     {
         $this->documentsRepository              = $documentsRepository;
         $this->coordinatedOrdersRepository      = $coordinatedOrdersRepository;
@@ -198,6 +206,7 @@ class BaseController extends Controller
         $this->pollsRepository                  = $pollsRepository;
         $this->pollResponseRepository           = $pollResponseRepository;
         $this->couponRepository                 = $couponRepository;
+        $this->atlpayRepository                 = $atlpayRepository;
 
         $this->middleware('auth');
         $this->setPermission();

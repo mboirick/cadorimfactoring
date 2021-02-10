@@ -248,9 +248,6 @@ class AtlpayController extends Controller
      */
     public function search(Request $request)
     {
-
-
-
         if ($request['search'] == 'recherche') {
             $constraints = [
                 'from' => $request['from'],

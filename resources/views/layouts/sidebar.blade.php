@@ -87,33 +87,32 @@
               </li>
         @endcan
 
-        @if(Auth::user()->user_type=='admin') 
-        <li><a href="{{ url('atlpay-management') }}" style="color: #fff;"><i class="fa fa-calculator"></i> <span>ATLPAY</span></a></li>
+        @can('atlpay') 
+        <li><a href="{{ route('atlpay.home') }}" style="color: #fff;"><i class="fa fa-calculator"></i> <span>ATLPAY</span></a></li>
+        @endcan
         
+        @can('sondage')
+          <li class="treeview">
+            <a href="{{ route('survey.home') }}" style="color: #fff;">
+              <i class="fa fa-bar-chart"></i> <span>Les sondages</span>
+            </a>
+          </li>
+        @endcan
 
+        @can('coupon')
+          <li class="treeview">
+            <a href="{{route('reduce.index')}}" style="color: #fff;">
+              <i class="fa fa-tag"></i> <span>Coupon Promo</span>
+            </a>
+          </li>
+        @endcan
 
-        <li class="treeview">
-          <a href="#" style="color: #fff;">
-            <i class="fa fa-line-chart"></i> <span>Les Statistiques</span>
-          </a>
-
-        </li>
-
-        @if(Auth::user()->user_type=='admin' || Auth::user()->user_type=='marketing' )
-        <li class="treeview">
-          <a href="{{ route('survey.home') }}" style="color: #fff;">
-            <i class="fa fa-bar-chart"></i> <span>Les sondages</span>
-          </a>
-
-        </li>
-
-        <li class="treeview">
-          <a href="{{ url('coupon') }}" style="color: #fff;">
-            <i class="fa fa-tag"></i> <span>Coupon Promo</span>
-          </a>
-          
-        </li>
-        @endif
+        @if(Auth::user()->user_type=='admin') 
+          <li class="treeview">
+            <a href="#" style="color: #fff;">
+              <i class="fa fa-line-chart"></i> <span>Les Statistiques</span>
+            </a>
+          </li>
         @endif
       </ul>
       <!-- /.sidebar-menu -->

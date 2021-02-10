@@ -52,4 +52,32 @@ class PaymentsRepository
               ->where('updated_at', '<=', $dateEnd)
               ->sum('payment_amount');
     }
+
+    public function getByDate($dateFrom, $dateto)
+    {
+        return Payments::where('paiements.updated_at', '>=', $dateFrom)
+                ->where('paiements.updated_at', '<=', $dateto)
+                ->Where('paiements.payment_status', '=', 'Complet')
+                ->Where('paiements.payment_type', '=', 'cart')
+                ->orderBy('paiements.updated_at', 'DESC')
+                ->paginate(20);
+    }
+
+    public function getCountByDate($dateFrom, $dateto)
+    {
+        return  Payments::where('paiements.updated_at', '>=', $dateFrom)
+            ->where('paiements.updated_at', '<=', $dateto)
+            ->Where('paiements.payment_status', '=', 'Complet')
+            ->Where('paiements.payment_type', '=', 'cart')
+            ->count();
+    }
+
+    public function getSumByDate($dateFrom, $dateto)
+    {
+        return  Payments::where('paiements.updated_at', '>=', $dateFrom)
+            ->where('paiements.updated_at', '<=', $dateto)
+            ->Where('paiements.payment_status', '=', 'Complet')
+            ->Where('paiements.payment_type', '=', 'cart')
+            ->sum('paiements.payment_amount');
+    }
 }
