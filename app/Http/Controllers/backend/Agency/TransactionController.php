@@ -97,9 +97,9 @@ class TransactionController extends BaseController
      */
     public function debit($id)
     {
-        $clients = $this->agencyRepository->getExcludeById($id, 'operateur');
+        $clients = $this->userRepository->getExcludeById($id, 'operateur');
 
-        $debiteur = $this->agencyRepository->getByIndexAndIdClient('1', $id);
+        $debiteur = $this->userRepository->getByIndexAndIdClient('1', $id);
 
         return view('backend/agency/transaction/debit', ['id'=>$id, 'clients' => $clients, 'debiteur' => $debiteur]);
     }

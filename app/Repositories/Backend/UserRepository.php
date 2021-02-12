@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
+    public function getAllByUserType($userType)
+    {
+        return User::select('id_client', 'firstname')
+                    ->where('user_type', '=', $userType)
+                    ->get();
+    }
+
     public function delete($id)
     {
         return $this->getById($id)->delete();
@@ -16,7 +23,9 @@ class UserRepository
 
     public function restore($id)
     {
-        return User::withTrashed()->findorfail($id)->restore();
+        return User::withTrashed()
+                    ->findorfail($id)
+                    ->restore();
     }
 
     public function update($id, $params)
@@ -27,7 +36,9 @@ class UserRepository
 
     public function getWithTrashedById($id)
     {
-        return  User::where('id',$id)->withTrashed()->first();
+        return  User::where('id',$id)
+                        ->withTrashed()
+                        ->first();
     } 
 
     public function getAllByCriterion(array $params)
@@ -39,6 +50,32 @@ class UserRepository
                 ->withTrashed() 
                 ->select('users.*')
                 ->paginate(20);
+    }
+
+    public function getClientsByIndiceUserType($indice, $userType)
+    {
+        return  User::leftJoin('solde_client', 'solde_client.id_client', '=', 'users.id_client')
+            ->select('users.*', 'solde_client.solde_euros', 'solde_client.solde_mru')
+            ->where('solde_client.indice', '=', $indice)
+            ->where('users.user_type', '=', $userType)
+            ->whereNotNull('email_verified_at')
+            ->orderBy('solde_client.created_at', 'DESC')
+            ->paginate(20);
+    }
+
+    public function getClientsByCriterion($params)
+    {
+        return DB::table('users')
+            ->leftJoin('solde_client', 'solde_client.id_client', '=', 'users.id_client')
+            ->select('users.*', 'solde_client.solde_euros', 'solde_client.solde_mru')
+            ->where('solde_client.indice', '=', '1')
+            ->where('users.user_type', '=', 'business')
+            ->where('users.firstname', 'LIKE', '%' . $params['societe'] . '%')
+            ->where('users.email', 'LIKE', '%' . $params['email'] . '%')
+            ->where('users.phone', 'LIKE', '%' . $params['telephone'] . '%')
+            ->whereNotNull('email_verified_at')
+            ->orderBy('users.created_at', 'DESC')
+            ->paginate(20);
     } 
 
     public function getByIdUser($id)
@@ -78,6 +115,12 @@ class UserRepository
             ->where('solde_client.indice', '=', $index)
             ->where('users.user_type', '=', $userType)
             ->sum('solde_client.'.$columnSum);
+
+            $solde_eur = DB::table('users')
+            ->leftJoin('solde_client', 'solde_client.id_client', '=', 'users.id_client')
+            ->where('solde_client.indice', '=', '1')
+            ->where('users.user_type', '=', 'business')
+            ->sum('solde_client.solde_euros');
     }
 
     /**
@@ -177,7 +220,6 @@ class UserRepository
                 'name' => $params['nom'],
                 'lastname' => $params['prenom'],
                 'phone' => $params['telephone']
-
             ]);
     }
 
@@ -191,8 +233,8 @@ class UserRepository
             'id_client' => $params['idClient'],
             'user_type' => $params['user_type'],
             'firstname' => $params['agence'],
-            'name' => $params['nom'],
-            'lastname' => $params['prenom'],
+            'name'      => $params['nom'],
+            'lastname'  => $params['prenom'],
             'email' => $params['email'],
             'phone' => $params['telephone'],
             'password' => Hash::make($params['idClient']),
@@ -200,16 +242,21 @@ class UserRepository
         ]);
     }
 
+    public function createUser(array $params)
+    {
+        return User::create($params);
+    }
+
     /**
      * get return number of accounts
      * @return array()
      */
-    public function getNumberOfAccounts()
+    public function getNumberOfAccounts($indice, $userType)
     {
         return User::leftJoin('agences', 'agences.id_client', '=', 'users.id_client')
             ->select('users.*',  'agences.solde_mru')
-            ->where('agences.indice', '=', '1')
-            ->where('users.user_type', '=', 'operateur')
+            ->where('agences.indice', '=', $indice)
+            ->where('users.user_type', '=', $userType)
             ->whereNotNull('email_verified_at')->count();
     }
 
@@ -295,5 +342,27 @@ class UserRepository
     public function getValueByIdClient($idClient, $column)
     {
         return User::where('id_client',  $idClient)->value($column);
+    }
+
+    public function getClientsByUserType($id, $userType)
+    {
+        return User::where('id_client', '!=', $id)
+                ->where('user_type', '=', $userType)
+                ->get();
+    }
+
+    public function getByIdClient($idClient)
+    {
+        return User::leftJoin('solde_client', 'solde_client.id_client', '=', 'users.id_client')
+            ->select('users.*', 'solde_client.solde_euros', 'solde_client.solde_mru')
+            ->where('solde_client.id_client', '=', $idClient)
+            ->where('solde_client.indice', '=', '1')
+            ->first();
+    }
+
+    public function getUserByIdClient($idClient)
+    {
+        return User::where('id_client', '=', $idClient)
+                    ->get();
     }
 }

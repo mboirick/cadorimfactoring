@@ -8,6 +8,19 @@ use App\Models\CustomerBalance;
 
 class CustomerBalanceRepository
 {
+    public function getFirstByIdClient($idClient)
+    {
+        return CustomerBalance::where('id_client', '=', $idClient)
+                                ->latest()
+                                ->first();
+    }
+
+    public function getByIdClient($idClient)
+    {
+        return CustomerBalance::where('solde_client.id_client', '=', $idClient)
+            ->orderBy('solde_client.created_at', 'DESC')
+            ->paginate(20);
+    }
 
     /**
      * @param array $params
@@ -30,6 +43,12 @@ class CustomerBalanceRepository
         ]);
 
     }
+
+    public function createClient(array $params)
+    {
+        return CustomerBalance::create($params);
+    }
+
     /**
      * @param $index
      * @param $idClient
@@ -54,6 +73,12 @@ class CustomerBalanceRepository
             ->where('id_client', '=', $idClient)->update([
             'indice' => $indexNew
         ]);
+    }
+
+    public function updateParamsIndexByIdClient($indexOld, $idClient, $params)
+    {
+        return CustomerBalance::where('indice', '=', $indexOld)
+            ->where('id_client', '=', $idClient)->update($params);
     }
 
     /**

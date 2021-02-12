@@ -122,11 +122,11 @@ class AgencyRepository
     }
 
     /**
-     * @param $date
-     * @param $idClient
-     * @param $order
-     * @return mixed
-     */
+    * @param $date
+    * @param $idClient
+    * @param $order
+    * @return mixed
+    */
     public function getByIdClientAndDate($date, $idClient, $order)
     {
         return DB::table('agences as A')
@@ -139,8 +139,8 @@ class AgencyRepository
     }
 
     /**
-     * @return mixed
-     */
+    * @return mixed
+    */
     public function getCount()
     {
         return Agency::count();

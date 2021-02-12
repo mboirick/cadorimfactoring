@@ -32,7 +32,7 @@ class PayementController extends Controller
     {
     }
 
-    public function attente()
+    /*public function attente()
     {
 
         $paiements = DB::table('cadorimpays')
@@ -48,10 +48,10 @@ class PayementController extends Controller
             'paiements' => $paiements
 
         ]);
-    }
+    }*/
 
 
-    public function story()
+   /* public function story()
     {
         $paiements = DB::table('cadorimpays')
             ->leftJoin('users', 'cadorimpays.id_client', '=', 'users.id_client')
@@ -67,10 +67,10 @@ class PayementController extends Controller
             'documents' => $documents
 
         ]);
-    }
+    }*/
 
 
-    public function client(Request $request)
+    /*public function client(Request $request)
     {
         $nbr_compte = DB::table('users')
             ->leftJoin('solde_client', 'solde_client.id_client', '=', 'users.id_client')
@@ -109,10 +109,10 @@ class PayementController extends Controller
             'infos' => $infos,
 
         ]);
-    }
+    }*/
 
 
-    public function editClient($id)
+    /*public function editClient($id)
     {
 
         $clientedit = DB::table('users')
@@ -120,9 +120,9 @@ class PayementController extends Controller
         $solde = DB::table('solde_client')->where('id_client', '=', $id)->latest()->first();
 
         return view('paiement-mgmt/editclient', ['clientedit' => $clientedit, 'solde' => $solde]);
-    }
+    }*/
 
-    public function creatclient(Request $request)
+    /*public function creatclient(Request $request)
     {
 
         $id_client = uniqid();
@@ -151,9 +151,9 @@ class PayementController extends Controller
 
         ]);
         return redirect()->intended('/paiement-management/clients');
-    }
+    }*/
 
-    public function updateClient($id, Request $request)
+    /*public function updateClient($id, Request $request)
     {
 
 
@@ -176,7 +176,7 @@ class PayementController extends Controller
             ]);
 
         return $this->client($request);
-    }
+    }*/
 
     public function clientdemande($id)
     {
@@ -214,7 +214,7 @@ class PayementController extends Controller
         ]);
     }
 
-    public function detail($id_paiement)
+    /*public function detail($id_paiement)
     {
 
         $paiements = DB::table('cadorimpays')
@@ -240,7 +240,7 @@ class PayementController extends Controller
             'soldes' => $soldes
 
         ]);
-    }
+    }*/
 
     public function decision(Request $request)
     {
@@ -345,7 +345,7 @@ class PayementController extends Controller
         return view('paiement-mgmt/crediter',  ['clients' => $clients, 'debiteur' => $debiteur]);
     }
 
-    public function addmontant(Request $request)
+    /*public function addmontant(Request $request)
     {
 
         //dd($request);
@@ -394,10 +394,10 @@ class PayementController extends Controller
         ]);
 
         return redirect()->intended('/paiement-management/clients');
-    }
+    }*/
 
 
-    public function debiter($id)
+    /*public function debiter($id)
     {
 
         $clients = DB::table('users')
@@ -411,10 +411,10 @@ class PayementController extends Controller
             ->first();
 
         return view('paiement-mgmt/debiter', ['clients' => $clients, 'debiteur' => $debiteur]);
-    }
+    }*/
 
 
-    public function retirermontant(Request $request)
+    /*public function retirermontant(Request $request)
     {
 
 
@@ -464,7 +464,7 @@ class PayementController extends Controller
 
 
         return redirect()->intended('/paiement-management/clients');
-    }
+    }*/
 
     private function createQueryInput($keys, $request)
     {
@@ -477,7 +477,7 @@ class PayementController extends Controller
         return $queryInput;
     }
 
-    public function searchcompte(Request $request)
+    /*public function searchcompte(Request $request)
     {
 
         //dd($request);
@@ -496,9 +496,8 @@ class PayementController extends Controller
 
         return view('paiement-mgmt/client', [
             'clients' => $clients,
-
         ]);
-    }
+    }*/
 
     public function depotview()
     {

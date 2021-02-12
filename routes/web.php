@@ -130,26 +130,39 @@ Route::get('/cash/flow/home', 'Backend\CashFlow\ManagementController@index')->na
 //Route::post('/paiement-management/depotretrait', 'PayementController@depotretrait')->name('depotretrait');
 //Route::get('/paiement-management/story', 'PayementController@story');
 //Route::get('/paiement-management/attente', 'PayementController@attente');
+Route::get('/payement/waiting', 'Backend\Payement\ManagementController@waiting')->name('payement.waiting');
 //Route::get('/paiement-management/clients', 'PayementController@client');
+Route::get('/payement/clients', 'Backend\Payement\ManagementController@clients')->name('payement.clients');
 //Route::get('/paiement-management/search', 'PayementController@search')->name('paiement-management.search'); 
 
 //Route::get('/paiement-management/{id}/editClient', 'PayementController@editClient')->name('paiement-management.editClient');
+Route::get('/payement/customer/edit/{id}', 'Backend\Payement\ManagementController@edit')->name('payement.customer.edit');
 
 //Route::get('/paiement-management/{id}/clientstory', 'PayementController@clientstory')->name('paiement-management.clientstory');
+Route::get('/payement/customer/story/{id}', 'Backend\Payement\ManagementController@story')->name('payement.customer.story');
 //Route::get('/paiement-management/{id}/clientdemande', 'PayementController@clientdemande')->name('paiement-management.clientdemande');
 //Route::get('/paiement-management/{id}/detail', 'PayementController@detail')->name('paiement-management.detail');
 //Route::get('/paiement-management/addclient', function(){ return view('paiement-mgmt/addclient');})->name('paiement-management.addclient');
+Route::get('/payement/add/customer', function(){ return view('backend.payement.management.addcustomer');})->name('payement.add.customer');
 //Route::post('/paiement-management/creatclient', 'PayementController@creatclient')->name('paiement-management.creatclient');
+Route::post('/payement/add/customer', 'Backend\Payement\ManagementController@store')->name('payement.add.customer');
 //Route::post('/paiement-management/gestion', 'PayementController@gestion')->name('paiement-management.gestion');
 //Route::post('/paiement-management/decision', 'PayementController@decision')->name('paiement-management.decision');
 //Route::post('/paiement-management/{id}/updateClient', 'PayementController@updateClient')->name('paiement-management.updateClient');
+Route::post('payement/customer/edit/{id}', 'Backend\Payement\ManagementController@update')->name('payement.customer.edit');
 
 //Route::get('/paiement-management/{id}/crediter', 'PayementController@crediter')->name('paiement-management.crediter');
+Route::get('/payement/customer/credit/{id}', 'Backend\Payement\ManagementController@credit')->name('payement.customer.credit');
 //Route::get('/paiement-management/{id}/debiter', 'PayementController@debiter')->name('paiement-management.debiter');
+Route::get('/payement/customer/debite/{id}', 'Backend\Payement\ManagementController@debite')->name('payement.customer.debite');
 
 //Route::post('/paiement-management/addmontant', 'PayementController@addmontant')->name('paiement-management.addmontant');
+Route::post('/payement/add/amount', 'Backend\Payement\ManagementController@addamount')->name('payement.add.amount');
 //Route::post('/paiement-management/retirermontant', 'PayementController@retirermontant')->name('paiement-management.retirermontant');
+Route::post('/payement/customer/withdrawal/amount', 'PayementController@withdrawalamount')->name('payement.customer.withdrawal.amount');
 //Route::post('/paiement-management/searchcompte', 'PayementController@searchcompte')->name('searchcompte');
+Route::post('/payement/clients/serach', 'Backend\Payement\ManagementController@search')->name('payement.clients.serach');
+
 //************* */ CASHOUT MANAGEMENT *********************//////
 /*Route::get('/cashout-management', 'CashoutController@index')->name('cashout-management');
 Route::get('cashout-management/searchCashOut', 'CashoutController@searchCashOut')->name('cashout-management.searchCashOut'); 

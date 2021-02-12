@@ -33,7 +33,7 @@ class ManagementController extends BaseController
             'index' => '1',
         ];
 
-        $numberOfAccounts = $this->userRepository->getNumberOfAccounts();
+        $numberOfAccounts = $this->userRepository->getNumberOfAccounts('1', 'operateur');
         $clients 		  = $this->userRepository->getByCriteria($params);
         $balance          = $this->agencyRepository->getBalance();
         $availableBalance = $this->cashRepository->getBalance();

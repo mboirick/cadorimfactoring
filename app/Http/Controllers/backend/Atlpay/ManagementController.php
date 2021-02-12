@@ -71,7 +71,7 @@ class ManagementController extends BaseController
         ];
         $atlpay = $this->getCashs($params);
 
-        return view('atlpay-mgmt/details', ['atlpay' => $atlpay, 'searchingVals' => $params]);
+        return view('backend.atlpay.management.details', ['atlpay' => $atlpay, 'searchingVals' => $params]);
     }
 
     private function getCashs($constraints)
