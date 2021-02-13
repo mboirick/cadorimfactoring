@@ -204,16 +204,107 @@ class ManagementController extends BaseController
 
     public function waiting()
     {
-        /*$paiements = DB::table('cadorimpays')
-            ->leftJoin('users', 'cadorimpays.id_client', '=', 'users.id_client')
-            ->select('cadorimpays.*', 'users.firstname')
-            ->where('cadorimpays.statut', '=', '0')
-            ->orderBy('cadorimpays.created_at', 'DESC')
-            ->paginate(20);
+        $paiements = $this->cadorimpaysRepository->getIdByStatus('0');
 
-        return view('paiement-mgmt/paiementcourant', [
+        return view('backend.payement.management.waiting', [
             'paiements' => $paiements
+        ]);
+    }
 
-        ]);*/
+    public function detail($id_paiement)
+    {
+        $paiements = $this->cadorimpaysRepository->getIdByStatus('0', $id_paiement);
+        $id_client =  $paiements[0]->id_client;
+        $documents = $this->invoicesRepository->getByIdPay($id_paiement);
+        $soldes = $this->customerBalanceRepository->getByIndexAndIdClient('1', $id_client);
+
+        return view('backend.payement.management.detail', [
+            'paiements' => $paiements[0],
+            'documents' => $documents,
+            'soldes' => $soldes
+
+        ]);
+    }
+
+    public function transaction(Request $request)
+    {
+        $id_paiement    = $request['paiement'];
+        $reponse        = $request['remarque'];
+        $id_client      = $request['id_client'];
+
+        $infos = $this->cadorimpaysRepository->getByIdPay($id_paiement);
+        /*$infos = DB::table('cadorimpays')-
+        >where('id_paiement', '=', $id_paiement)->first();*/
+
+        if ($request['operation'] == 'approuver'  && $infos->statut == 0) {
+
+            $data_avant = $this->customerBalanceRepository->getByIndexAndIdClient('1', $id_client);
+            /*$data_avant =  DB::table('solde_client')
+                ->where('id_client', '=', $id_client)
+                ->where('indice', '=', 1)->first();*/
+            $files = $request->file('document');
+            if ($request->hasFile('document')) {
+                foreach ($files as $file) {
+                    $path = $file->store('factures');
+                    $input['type'] = "recu";
+                    $input['id_client'] = $id_client;
+                    $input['id_paiement'] = $id_paiement;
+                    $input['path'] = $path;
+                    $input['numero_facture'] = $request['reference'];
+
+                    $this->invoicesRepository->create($input);
+                }
+            }
+
+            if ($request['type_demande'] == 'credit') {
+                $input = [
+                    'id_client' =>  $id_client,
+                    'id_client_debiteur' => $request['type_demande'],
+                    'solde_avant_euros' => $data_avant->solde_euros,
+                    'solde_avant_mru' => $data_avant->solde_mru,
+                    'solde_euros' => $data_avant->solde_euros + $request['montant_euros'],
+                    'solde_mru' => $data_avant->solde_mru +  $request['montant_mru'],
+                    'montant_euros' => $request['montant_euros'],
+                    'taux' => $request['taux_echange'],
+                    'montant_mru' => $request['montant_mru'],
+                    'indice' => 1,
+                    'motif' =>  $reponse,
+                    'type_opperation' => $request['type_demande']
+
+                ];
+            } else {
+                $input = [
+                    'id_client' =>  $id_client,
+                    'id_client_debiteur' => $infos->entreprise,
+                    'solde_avant_euros' => $data_avant->solde_euros,
+                    'solde_avant_mru' => $data_avant->solde_mru,
+                    'solde_euros' => $data_avant->solde_euros - $request['montant_euros'],
+                    'solde_mru' => $data_avant->solde_mru -  $request['montant_mru'],
+                    'montant_euros' => $request['montant_euros'],
+                    'taux' => $request['taux_echange'],
+                    'montant_mru' => $request['montant_mru'],
+                    'indice' => 1,
+                    'motif' =>  $reponse,
+                    'type_opperation' => $request['type_demande']
+
+                ];
+            }
+
+            $this->customerBalanceRepository->updateByIdClient(['indice' => 0]);
+            //DB::table('solde_client')->where('id_client', '=', $id_client)->update(['indice' => 0]);
+            //Solde_client::create($input);
+            $this->customerBalanceRepository->createClient($input);
+            $this->cadorimpaysRepository->UpdateByIdPay(['statut' => 1, 'reponses' =>  $reponse]);
+            //DB::table('cadorimpays')->where('id_paiement', '=', $id_paiement)->update(['statut' => 1, 'reponses' =>  $reponse]);
+
+            
+        }
+
+        if ($request['operation'] == 'rejeter'  && $infos->statut == 0) {
+            $this->cadorimpaysRepository->UpdateByIdPay(['statut' => 2, 'reponses' =>  $reponse]);
+            //DB::table('cadorimpays')->where('id_paiement', '=', $id_paiement)->update(['statut' => 2, 'reponses' =>  $reponse]);
+        }
+
+        return redirect()->intended('payement/waiting');
     }
 }

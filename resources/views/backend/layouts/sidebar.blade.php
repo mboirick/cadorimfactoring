@@ -43,7 +43,7 @@
             </a>
             <ul class="treeview-menu">
               <li><a href="{{ route('payement.clients') }}" style="color: #fff;"><i class="fa fa-user"></i> Clients</a></li>
-              <li><a href="{{ url('paiement-management/attente') }}" style="color: #fff;"><i class="fa fa-clock-o"></i> Paiement en attente</a></li>
+              <li><a href="{{ route('payement.waiting') }}" style="color: #fff;"><i class="fa fa-clock-o"></i> Paiement en attente</a></li>
               <li><a href="{{ url('paiement-management/story') }}" style="color: #fff;"><i class="fa fa-archive"></i> historique de paiement</a></li>
             </ul>
           </li>

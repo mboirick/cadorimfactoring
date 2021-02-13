@@ -142,12 +142,14 @@ Route::get('/payement/customer/edit/{id}', 'Backend\Payement\ManagementControlle
 Route::get('/payement/customer/story/{id}', 'Backend\Payement\ManagementController@story')->name('payement.customer.story');
 //Route::get('/paiement-management/{id}/clientdemande', 'PayementController@clientdemande')->name('paiement-management.clientdemande');
 //Route::get('/paiement-management/{id}/detail', 'PayementController@detail')->name('paiement-management.detail');
+Route::get('/payement/detail/{id}', 'Backend\Payement\ManagementController@detail')->name('payement.detail');
 //Route::get('/paiement-management/addclient', function(){ return view('paiement-mgmt/addclient');})->name('paiement-management.addclient');
 Route::get('/payement/add/customer', function(){ return view('backend.payement.management.addcustomer');})->name('payement.add.customer');
 //Route::post('/paiement-management/creatclient', 'PayementController@creatclient')->name('paiement-management.creatclient');
 Route::post('/payement/add/customer', 'Backend\Payement\ManagementController@store')->name('payement.add.customer');
 //Route::post('/paiement-management/gestion', 'PayementController@gestion')->name('paiement-management.gestion');
 //Route::post('/paiement-management/decision', 'PayementController@decision')->name('paiement-management.decision');
+Route::post('/payement/transaction', 'Backend\Payement\ManagementController@transaction')->name('payement.transaction');
 //Route::post('/paiement-management/{id}/updateClient', 'PayementController@updateClient')->name('paiement-management.updateClient');
 Route::post('payement/customer/edit/{id}', 'Backend\Payement\ManagementController@update')->name('payement.customer.edit');
 

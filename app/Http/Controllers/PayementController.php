@@ -242,7 +242,7 @@ class PayementController extends Controller
         ]);
     }*/
 
-    public function decision(Request $request)
+    /*public function decision(Request $request)
     {
 
 
@@ -326,7 +326,7 @@ class PayementController extends Controller
             //send notification
             return redirect()->intended('/paiement-management/clients');
         }
-    }
+    }*/
 
     public function crediter($id)
     {

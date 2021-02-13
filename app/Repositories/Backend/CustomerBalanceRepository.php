@@ -75,6 +75,11 @@ class CustomerBalanceRepository
         ]);
     }
 
+    public function updateByIdClient($idClient, array $params)
+    {
+        return CustomerBalance::where('id_client', '=', $idClient)->update($params);
+    }
+
     public function updateParamsIndexByIdClient($indexOld, $idClient, $params)
     {
         return CustomerBalance::where('indice', '=', $indexOld)

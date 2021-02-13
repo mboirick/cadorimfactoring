@@ -21,13 +21,6 @@ class PaymentsRepository
             ->where('payment_status', '=', $paymentStatus)
             ->where('payment_currency', '=', $paymentCurrency)
             ->sum('payment_amount');
-
-        $virementUSD = DB::table('paiements')
-            ->select('payment_amount')
-            ->where('payment_type', '=', 'Virement')
-            ->where('payment_status', '=', 'En attente')
-            ->where('payment_currency', '=', 'USD')
-            ->sum('payment_amount');
     }
 
     public function getSumByEmailAndStatus($email, $paymentStatus)
