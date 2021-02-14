@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Backend\Payement;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Backend\BaseController;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PaymentExport;
 
 class ManagementController extends BaseController
 {
@@ -13,21 +16,32 @@ class ManagementController extends BaseController
         $solde_eur  = $this->userRepository->getSumByColumns('business', '1', 'solde_euros');
         $solde_mru  = $this->userRepository->getSumByColumns('business', '1', 'solde_mru');
         
-        $clients        = $this->userRepository->getClientsByIndiceUserType('1', 'business');
+       // $clients        = $this->userRepository->getClientsByIndiceUserType('1', 'business');
         $solde_dispo    = $this->cashRepository->getAvailableBalance();
+
+        $params = [
+                'societe' => isset($request['societe'])?$request['societe']:'', 
+                'email' => isset($request['email'])?$request['email']:'', 
+                'telephone' => isset($request['telephone'])?$request['telephone']:''
+                ];
+        switch ($request['search']) {
+            case 'recherche':
+                //$params = ['societe' =>$request['societe'], 'email' => $request['email'], 'telephone' =>$request['societe']];
+                $clients = $this->userRepository->getClientsByCriterion($params);
+                break;
+            case 'excel':
+                return Excel::download(new PaymentExport($params), 'payments.xlsx');
+                break;
+            default:
+                $clients = $this->userRepository->getClientsByIndiceUserType('1', 'business');
+        }
 
         $infos =  ['nbr_compte' => $nbr_compte, 'solde_eur' => floor($solde_eur), 'solde_mru' => floor($solde_mru), 'solde_dispo' =>  floor($solde_dispo)];
 
         return view('backend.payement.management.clients', [
             'clients' => $clients,
             'infos' => $infos,
-        ]);
-    }
-
-    public function search(Request $request)
-    {
-        return view('backend.payement.management.clients', [
-            'clients' => $this->userRepository->getClientsByCriterion($request),
+            'params' => $params
         ]);
     }
 
@@ -69,7 +83,7 @@ class ManagementController extends BaseController
     public function update($id, Request $request)
     {
         $inputcash['nom_benef'] = $request['societe'];
-
+        
         $this->userRepository->updateById($id, [
             'agence' => $request['societe'],
             'nom' => $request['nom'],
@@ -82,7 +96,7 @@ class ManagementController extends BaseController
             'solde_mru' => $request['solde_mru']
         ]);
 
-        return $this->client($request);
+        return $this->clients($request);
     }
 
     public function store(Request $request)
@@ -166,7 +180,7 @@ class ManagementController extends BaseController
         $montant_mru = $request['montant'];
 
         $solde_debiteur = $this->customerBalanceRepository->getByIndexAndIdClient('1', $request['debiteur']);
-        $solde_debiteur = $this->customerBalanceRepository->getByIndexAndIdClient('1', $request['benef']);
+        $solde_crediteur = $this->customerBalanceRepository->getByIndexAndIdClient('1', $request['benef']);
         
         $this->customerBalanceRepository->updateIndexByIdClient('1', $request['debiteur'], 0);
         $this->customerBalanceRepository->updateIndexByIdClient('1', $request['benef'], 0);
@@ -199,15 +213,22 @@ class ManagementController extends BaseController
             'type_opperation' => 'credit'
         ]);
 
-        return redirect()->intended('/paiement-management/clients');
+        return redirect()->intended('/payement/clients');
     }
 
-    public function waiting()
+    public function waiting(Request $request)
     {
+        $params = [
+            'emetteur' => isset($request['emetteur'])?$request['emetteur']:'', 
+            'beneficiaire' => isset($request['beneficiaire'])?$request['beneficiaire']:'', 
+            'operation' => isset($request['operation'])?$request['operation']:''
+            ];
+
         $paiements = $this->cadorimpaysRepository->getIdByStatus('0');
 
         return view('backend.payement.management.waiting', [
-            'paiements' => $paiements
+            'paiements' => $paiements,
+            'params' => $params,
         ]);
     }
 
@@ -233,15 +254,10 @@ class ManagementController extends BaseController
         $id_client      = $request['id_client'];
 
         $infos = $this->cadorimpaysRepository->getByIdPay($id_paiement);
-        /*$infos = DB::table('cadorimpays')-
-        >where('id_paiement', '=', $id_paiement)->first();*/
 
         if ($request['operation'] == 'approuver'  && $infos->statut == 0) {
 
             $data_avant = $this->customerBalanceRepository->getByIndexAndIdClient('1', $id_client);
-            /*$data_avant =  DB::table('solde_client')
-                ->where('id_client', '=', $id_client)
-                ->where('indice', '=', 1)->first();*/
             $files = $request->file('document');
             if ($request->hasFile('document')) {
                 foreach ($files as $file) {
@@ -291,19 +307,12 @@ class ManagementController extends BaseController
             }
 
             $this->customerBalanceRepository->updateByIdClient(['indice' => 0]);
-            //DB::table('solde_client')->where('id_client', '=', $id_client)->update(['indice' => 0]);
-            //Solde_client::create($input);
             $this->customerBalanceRepository->createClient($input);
-            $this->cadorimpaysRepository->UpdateByIdPay(['statut' => 1, 'reponses' =>  $reponse]);
-            //DB::table('cadorimpays')->where('id_paiement', '=', $id_paiement)->update(['statut' => 1, 'reponses' =>  $reponse]);
-
-            
+            $this->cadorimpaysRepository->UpdateByIdPay(['statut' => 1, 'reponses' =>  $reponse]);  
         }
 
-        if ($request['operation'] == 'rejeter'  && $infos->statut == 0) {
+        if ($request['operation'] == 'rejeter'  && $infos->statut == 0)
             $this->cadorimpaysRepository->UpdateByIdPay(['statut' => 2, 'reponses' =>  $reponse]);
-            //DB::table('cadorimpays')->where('id_paiement', '=', $id_paiement)->update(['statut' => 2, 'reponses' =>  $reponse]);
-        }
 
         return redirect()->intended('payement/waiting');
     }

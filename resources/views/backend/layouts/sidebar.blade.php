@@ -95,27 +95,22 @@
             </a>
           </li>
         @endcan
-          
-        @if(Auth::user()->user_type=='admin')
+      
+        @can('sondage')
           <li class="treeview">
-            <a href="#" style="color: #fff;">
-              <i class="fa fa-line-chart"></i> <span>Les Statistiques</span>
+            <a href="{{ route('survey.home') }}" style="color: #fff;">
+              <i class="fa fa-bar-chart"></i> <span>Les sondages</span>
             </a>
           </li>
-        @endif
-        @if(Auth::user()->user_type=='admin' || Auth::user()->user_type=='marketing' )
-            <li class="treeview">
-              <a href="{{ route('survey.home') }}" style="color: #fff;">
-                <i class="fa fa-bar-chart"></i> <span>Les sondages</span>
-              </a>
-            </li>
+        @endcan
 
-            <li class="treeview">
-              <a href="{{route('reduce.index')}}" style="color: #fff;">
-                <i class="fa fa-tag"></i> <span>Coupon Promo</span>
-              </a>
-            </li>
-        @endif
+        @can('coupon')
+          <li class="treeview">
+            <a href="{{route('reduce.index')}}" style="color: #fff;">
+              <i class="fa fa-tag"></i> <span>Coupon Promo</span>
+            </a>
+          </li>
+        @endcan
       </ul>
       <!-- /.sidebar-menu -->
     </section>

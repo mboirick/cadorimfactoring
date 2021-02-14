@@ -68,7 +68,7 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4"></div>
       </div>
-      <form method="POST" action="{{route('payement.clients.serach')}}">
+      <form method="GET" action="{{route('payement.clients')}}">
         <div class="box box-default">
           <div class="box-header with-border">
             <div class="row">
@@ -77,21 +77,21 @@
                     <div class="col-md-4">
                       <div class="form-group">
                           <div class="col-sm-12">
-                            <input value="{{isset($oldVals) ? $oldVals[$index] : ''}}" type="text" class="form-control" name="societe" id="input-Societe" placeholder="Societe">
+                            <input value="{{$params['societe']}}" type="text" class="form-control" name="societe" id="input-Societe" placeholder="Societe">
                           </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                           <div class="col-sm-12">
-                            <input value="{{isset($oldVals) ? $oldVals[$index] : ''}}" type="email" class="form-control" name="email" id="input-Email" placeholder="Email">
+                            <input value="{{$params['email']}}" type="email" class="form-control" name="email" id="input-Email" placeholder="Email">
                           </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                           <div class="col-sm-12">
-                            <input value="{{isset($oldVals) ? $oldVals[$index] : ''}}" type="text" class="form-control" name="telephone" id="input-Telephone" placeholder="Telephone">
+                            <input value="{{$params['telephone']}}" type="text" class="form-control" name="telephone" id="input-Telephone" placeholder="Telephone">
                           </div>
                       </div>
                     </div>
@@ -142,18 +142,12 @@
                 </tr>
               </thead>
               <tbody>
-
-
-
-
                 @foreach ($clients as $indexKey => $client)
                 @if($indexKey % 2 )
                 <tr role="row" class="odd" style="background : #ddd">
                   @else
                 <tr role="row" class="odd">
                   @endif
-
-
                   <td class="sorting_1">{{$client->firstname }} </td>
                   <td class="sorting_1"> {{$client->name}} {{$client->lastname}}</td>
                   <td class="hidden-xs">{{ $client->email  }}</td>
@@ -180,18 +174,13 @@
 
                 </tr>
                 @endforeach
-
               </tbody>
-
               <tfoot>
                 <thead>
-
               </tfoot>
             </table>
             @else
             <h3 align='center' style="color: #dd4b39;"> Désolé, aucun résultat n'a été trouvé</h3>
-
-
             @endif
           </div>
         </div>

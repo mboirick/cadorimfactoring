@@ -20,15 +20,49 @@
         <div class="col-sm-4"></div>
         <div class="col-sm-4"></div>
       </div>
-      <form method="get" action="{{ route('payement.clients') }}">
-      {{ csrf_field() }}
-      @component('paiement-mgmt.search', ['title' => 'Search'])
-      @component('paiement-mgmt.search-row', ['items' => ['Emetteur', 'Beneficiaire', 'Operation'],
-      'oldVals' => [isset($searchingVals) ? $searchingVals['emetteur'] : '', isset($searchingVals) ? $searchingVals['beneficiaire'] : '' , isset($searchingVals) ? $searchingVals['operation'] : '']])
-      @endcomponent
-      @endcomponent
+      <form method="get" action="{{ route('payement.waiting') }}">
+        {{ csrf_field() }}
+        <div class="box box-default">
+            <div class="box-header with-border">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                              <input value="{{$params['emetteur']}}" type="text" class="form-control" name="emetteur" id="input-emetteur" placeholder="Emetteur">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                              <input value="{{$params['beneficiaire']}}" type="text" class="form-control" name="beneficiaire" id="input-beneficiaire" placeholder="Beneficiaire">
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                              <input value="{{$params['operation']}}" type="text" class="form-control" name="operation" id="input-operation" placeholder="Operation">
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- /.box-header -->
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-warning" name="search" value="recherche">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                  Search
+                </button>
 
-
+                <button type="submit" class="btn btn-primary" name="search" value="excel">
+                  <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                  Export to Excel
+                </button> 
+            </div>
+          </div>
       </form>
       
       <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">

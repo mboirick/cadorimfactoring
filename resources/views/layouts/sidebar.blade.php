@@ -106,14 +106,6 @@
             </a>
           </li>
         @endcan
-
-        @if(Auth::user()->user_type=='admin') 
-          <li class="treeview">
-            <a href="#" style="color: #fff;">
-              <i class="fa fa-line-chart"></i> <span>Les Statistiques</span>
-            </a>
-          </li>
-        @endif
       </ul>
       <!-- /.sidebar-menu -->
     </section>
