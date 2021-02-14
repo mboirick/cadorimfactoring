@@ -1,4 +1,4 @@
-@extends('cache-mgmt.base')
+@extends('backend.layouts.base')
 
 @section('action-content')
 <div class="container">

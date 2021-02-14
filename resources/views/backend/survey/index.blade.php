@@ -1,10 +1,7 @@
-@extends('cache-mgmt.base')
+@extends('backend.layouts.base')
 @section('action-content')
 <!-- Main content -->
 <section class="content">
-
-
-
     <div class="box">
         <div class="box-header">
 
@@ -57,8 +54,7 @@
                                         <td class="sorting_1"> {{ $sondage -> id_sondage}}</td>
                                         <td class="hidden-xs">{{$envoie}}</td>
                                         <td class="hidden-xs">{{ $reponse}}</td>
-                                        <!-- <td class="hidden-xs"> <a href=" {{route('sondage-management.voir',['id_sondages' => $sondage -> id_sondage ])}}" class="btn btn-success">
-                                                voir -->
+                                       
                                         <td class="hidden-xs"> <a href=" {{route('survey.answers',['idPoll' => $sondage -> id_sondage ])}}" class="btn btn-success">
                                                 Reponses
                                             </a> | <a href=" {{ route('survey.send.email', ['id' => $sondage -> id_sondage ])}}" class="btn btn-warning">

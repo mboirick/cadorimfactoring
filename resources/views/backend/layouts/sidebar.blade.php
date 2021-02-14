@@ -51,8 +51,6 @@
 
         @can('admin-Cash-out')
           <li><a href="{{ route('cash.out.home') }}" style="color: #fff;"><i class="fa fa-paper-plane"></i> <span>Transfert</span></a></li>
-
-          <li><a href="{{ url('virement-management') }}" style="color: #fff;"><i class="fa fa-share"></i> <span>Les virements</span></a></li>
         @endcan
 
         @can('parrainage')
