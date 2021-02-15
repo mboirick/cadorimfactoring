@@ -1,4 +1,4 @@
-@extends('cache-mgmt.base')
+@extends('backend.layouts.base')
 @section('action-content')
 <!-- Main content -->
 <section class="content">
@@ -16,11 +16,9 @@
     </div>
     <!-- fix for small devices only -->
     <div class="clearfix visible-sm-block"></div>
-
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <a href="{{ url('virement-management') }}"> <span class="info-box-icon bg-yellow"><i class="fa fa-share" aria-hidden="true"></i></span></a>
-
         <div class="info-box-content">
           <span class="info-box-text">Les virements en attente </span>
           <span class="info-box-number" style="font-size: x-large;">
@@ -35,8 +33,6 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <a href="{{ route('cash.flow.home') }}"><span class="info-box-icon bg-red"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></span></a>
-
-
         <div class="info-box-content">
           <span class="info-box-text">Cash OUT EN ATTENTE</span>
           <span class="info-box-number" style="font-size: x-large;">{{ number_format(floor($soldecashout)) }} <small> MRU</small></span>
@@ -49,10 +45,8 @@
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <a href="{{ url('cache-management') }}"><span class="info-box-icon bg-green"><i class="fa fa-money" aria-hidden="true"></i></span></a>
-
         <div class="info-box-content">
           <span class="info-box-text">Cash Disponible </span>
-
           <span class="info-box-number" style="font-size: x-large;"> {{ number_format(floor($solde))   }} <small>MRU</small> </span>
         </div>
         <!-- /.info-box-content -->
@@ -63,7 +57,6 @@
   </div>
 
   <section class="content">
-
     <div class="row">
       <!-- Left col -->
       <section class="col-lg-7 connectedSortable">
@@ -82,14 +75,11 @@
           </div>
         </div>
         <!-- /.nav-tabs-custom -->
-
         <!-- Chat box -->
         <div class="box box-success">
           <div class="box-header">
             <i class="fa fa-comments-o"></i>
-
             <h3 class="box-title">Chat</h3>
-
             <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
               <div class="btn-group" data-toggle="btn-toggle">
                 <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i>
@@ -102,7 +92,6 @@
             <!-- chat item -->
             <div class="item">
               <img src="dist/img/user4-128x128.jpg" alt="user image" class="online">
-
               <p class="message">
                 <a href="#" class="name">
                   <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
@@ -114,11 +103,9 @@
               </p>
               <div class="attachment">
                 <h4>Attachments:</h4>
-
                 <p class="filename">
                   Theme-thumbnail-image.jpg
                 </p>
-
                 <div class="pull-right">
                   <button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
                 </div>
@@ -129,7 +116,6 @@
             <!-- chat item -->
             <div class="item">
               <img src="dist/img/user3-128x128.jpg" alt="user image" class="offline">
-
               <p class="message">
                 <a href="#" class="name">
                   <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
@@ -144,7 +130,6 @@
             <!-- chat item -->
             <div class="item">
               <img src="dist/img/user2-160x160.jpg" alt="user image" class="offline">
-
               <p class="message">
                 <a href="#" class="name">
                   <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
@@ -161,7 +146,6 @@
           <div class="box-footer">
             <div class="input-group">
               <input class="form-control" placeholder="Type message...">
-
               <div class="input-group-btn">
                 <button type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
               </div>
@@ -174,9 +158,7 @@
         <div class="box box-primary">
           <div class="box-header">
             <i class="ion ion-clipboard"></i>
-
             <h3 class="box-title">To Do List</h3>
-
             <div class="box-tools pull-right">
               <ul class="pagination pagination-sm inline">
                 <li><a href="#">&laquo;</a></li>
@@ -286,7 +268,6 @@
         <div class="box box-info">
           <div class="box-header">
             <i class="fa fa-envelope"></i>
-
             <h3 class="box-title">Quick Email</h3>
             <!-- tools box -->
             <div class="pull-right box-tools">
@@ -313,12 +294,10 @@
               <i class="fa fa-arrow-circle-right"></i></button>
           </div>
         </div>
-
       </section>
       <!-- /.Left col -->
       <!-- right col (We are only adding the ID to make the widgets sortable)-->
       <section class="col-lg-5 connectedSortable">
-
         <!-- Map box -->
         <div class="box box-solid bg-light-blue-gradient">
           <div class="box-header">
@@ -330,9 +309,7 @@
                 <i class="fa fa-minus"></i></button>
             </div>
             <!-- /. tools -->
-
             <i class="fa fa-map-marker"></i>
-
             <h3 class="box-title">
               Visitors
             </h3>
@@ -363,14 +340,11 @@
           </div>
         </div>
         <!-- /.box -->
-
         <!-- solid sales graph -->
         <div class="box box-solid bg-teal-gradient">
           <div class="box-header">
             <i class="fa fa-th"></i>
-
             <h3 class="box-title">Sales Graph</h3>
-
             <div class="box-tools pull-right">
               <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
               </button>
@@ -386,19 +360,16 @@
             <div class="row">
               <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
                 <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
                 <div class="knob-label">Mail-Orders</div>
               </div>
               <!-- ./col -->
               <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
                 <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
                 <div class="knob-label">Online</div>
               </div>
               <!-- ./col -->
               <div class="col-xs-4 text-center">
                 <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60" data-fgColor="#39CCCC">
-
                 <div class="knob-label">In-Store</div>
               </div>
               <!-- ./col -->
@@ -408,12 +379,10 @@
           <!-- /.box-footer -->
         </div>
         <!-- /.box -->
-
         <!-- Calendar -->
         <div class="box box-solid bg-green-gradient">
           <div class="box-header">
             <i class="fa fa-calendar"></i>
-
             <h3 class="box-title">Calendar</h3>
             <!-- tools box -->
             <div class="pull-right box-tools">
@@ -452,7 +421,6 @@
                 <div class="progress xs">
                   <div class="progress-bar progress-bar-green" style="width: 90%;"></div>
                 </div>
-
                 <div class="clearfix">
                   <span class="pull-left">Task #2</span>
                   <small class="pull-right">70%</small>
@@ -470,7 +438,6 @@
                 <div class="progress xs">
                   <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
                 </div>
-
                 <div class="clearfix">
                   <span class="pull-left">Task #4</span>
                   <small class="pull-right">40%</small>
@@ -485,13 +452,10 @@
           </div>
         </div>
         <!-- /.box -->
-
       </section>
       <!-- right col -->
     </div>
     <!-- /.row (main row) -->
-
   </section>
   </div>
-
   @endsection

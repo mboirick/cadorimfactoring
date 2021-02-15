@@ -10,8 +10,6 @@ class MailController extends Controller
 {
     public function send(Request $request)
 	{
-	
-
 	    $details = [
 	    	'to' => $request->email,
 	    	'from' => 'noreply@cadorim.com',

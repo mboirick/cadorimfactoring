@@ -2,7 +2,6 @@
 @section('action-content')
 <!-- Main content -->
 <section class="content">
-
   <div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
@@ -22,7 +21,6 @@
     </div>
     <!-- fix for small devices only -->
     <div class="clearfix visible-sm-block"></div>
-
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <a href="#"> <span class="info-box-icon bg-blue"><i class="fa fa-money" aria-hidden="true"></i></span></a>
@@ -49,7 +47,6 @@
       </div>
       <!-- /.info-box -->
     </div>
-
     <div class="col-md-3 col-sm-6 col-xs-12">
       <div class="info-box">
         <a href=""><span class="info-box-icon bg-green"><i class="fa fa-money" aria-hidden="true"></i></span></a>
@@ -172,7 +169,6 @@
                 @endforeach
               </tbody>
               <tfoot>
-
               </tfoot>
             </table>
           </div>
